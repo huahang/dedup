@@ -23,6 +23,7 @@ func main() {
 		panic(err)
 	}
 	defer db.Close()
+	count := 0
 	err = filepath.Walk("./", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			fmt.Println("Error walking through directory:", err)
@@ -54,8 +55,10 @@ func main() {
 			}
 			return nil
 		})
+		count++
 		return nil
 	})
+	fmt.Printf("%d files proccessed\n", count)
 	if err != nil {
 		fmt.Println("Error walking through directory:", err)
 	}
